@@ -12,9 +12,10 @@ import {
   FaBirthdayCake,
   FaVenusMars,
 } from "react-icons/fa";
-import Header from "../../Components/Header/Header";
-import ErrorCard from "../../Components/ErrorCard/ErrorCard";
-import Background from "../../Components/Background/Background";
+import Header from "@/Components/Header/Header";
+import ErrorCard from "@/Components/ErrorCard/ErrorCard";
+import Background from "@/Components/Background/Background";
+import AppInput from "../../Components/Inputs/AppInput";
 
 export default function Register() {
   const [errorMsg, setErrorMsg] = useState(null);
@@ -75,6 +76,45 @@ export default function Register() {
       });
   }
 
+  const fields = [
+    {
+      label: "Full Name",
+      icon: <FaUser className="h-5 w-5 text-purple-300/70" />,
+      type: "text",
+      placeholder: "Enter your full name",
+      isInvalid: Boolean(errors.name),
+      errorMessage: errors.name?.message,
+      register: register("name"),
+    },
+    {
+      label: "Email Address",
+      icon: <FaEnvelope className="h-5 w-5 text-purple-300/70" />,
+      type: "email",
+      placeholder: "you@example.com",
+      isInvalid: Boolean(errors.email),
+      errorMessage: errors.email?.message,
+      register: register("email"),
+    },
+    {
+      label: "Password",
+      icon: <FaLock className="h-5 w-5 text-purple-300/70" />,
+      type: "password",
+      placeholder: "Create a strong password",
+      isInvalid: Boolean(errors.password),
+      errorMessage: errors.password?.message,
+      register: register("password"),
+    },
+    {
+      label: "Confirm Password",
+      icon: <FaLock className="h-5 w-5 text-purple-300/70" />,
+      type: "password",
+      placeholder: "Confirm your password",
+      isInvalid: Boolean(errors.rePassword),
+      errorMessage: errors.rePassword?.message,
+      register: register("rePassword"),
+    },
+  ];
+
   return (
     <Background maxWidth="max-w-md">
       {/* Hero Header */}
@@ -83,87 +123,14 @@ export default function Register() {
       <div className="bg-white/10  rounded-3xl p-8 shadow-2xl border border-white/20">
         {errorMsg && <ErrorCard errorMsg={errorMsg} />}
         <form onSubmit={handleSubmit(handleRegister)} className="space-y-6">
-          {/* Name Field */}
-          <div className="group">
-            <label className="block text-sm font-semibold text-gray-200 mb-2">
-              Full Name
-            </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 row pointer-events-none">
-                <FaUser className="h-5 w-5 text-purple-300/70" />
-              </div>
-              <Input
-                isInvalid={Boolean(errors.name)}
-                errorMessage={errors.name?.message}
-                className="input"
-                placeholder="Enter your full name"
-                variant="bordered"
-                {...register("name")}
+          {
+            fields.map((field, index) => (
+              <AppInput
+                key={index}
+                {...field}
               />
-            </div>
-          </div>
-
-          {/* Email Field */}
-          <div className="group">
-            <label className="block text-sm font-semibold text-gray-200 mb-2">
-              Email Address
-            </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 row pointer-events-none">
-                <FaEnvelope className="h-5 w-5 text-purple-300/70" />
-              </div>
-              <Input
-                isInvalid={Boolean(errors.email)}
-                errorMessage={errors.email?.message}
-                className="input"
-                placeholder="you@example.com"
-                variant="bordered"
-                {...register("email")}
-              />
-            </div>
-          </div>
-
-          {/* Password Field */}
-          <div className="group">
-            <label className="block text-sm font-semibold text-gray-200 mb-2">
-              Password
-            </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 row pointer-events-none">
-                <FaLock className="h-5 w-5 text-purple-300/70" />
-              </div>
-              <Input
-                isInvalid={Boolean(errors.password)}
-                errorMessage={errors.password?.message}
-                className="input"
-                placeholder="Create a strong password"
-                type="password"
-                variant="bordered"
-                {...register("password")}
-              />
-            </div>
-          </div>
-
-          {/* Confirm Password Field */}
-          <div className="group">
-            <label className="block text-sm font-semibold text-gray-200 mb-2">
-              Confirm Password
-            </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 row pointer-events-none">
-                <FaLock className="h-5 w-5 text-purple-300/70" />
-              </div>
-              <Input
-                isInvalid={Boolean(errors.rePassword)}
-                errorMessage={errors.rePassword?.message}
-                className="input"
-                placeholder="Confirm your password"
-                type="password"
-                variant="bordered"
-                {...register("rePassword")}
-              />
-            </div>
-          </div>
+            ))
+          }
 
           {/* Date of Birth Field */}
           <div className="group">

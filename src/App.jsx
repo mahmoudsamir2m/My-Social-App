@@ -7,7 +7,7 @@ import Posts from './pages/Posts/Posts'
 import PostDetails from './pages/PostDetails/PostDetails'
 import Profile from './pages/Profile/Profile'
 import NotFound from './pages/NotFound/NotFound'
-const rootes = createBrowserRouter([
+const routes = createBrowserRouter([
   {
     path: "",
     element: <MainLayout />,
@@ -23,10 +23,9 @@ const rootes = createBrowserRouter([
   },
 ]);
 function App() {
-
   return (
     <>
-      <RouterProvider router={rootes}>
+      <RouterProvider router={routes}>
       </RouterProvider>
     </>
   );

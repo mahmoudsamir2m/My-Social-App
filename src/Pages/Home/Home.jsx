@@ -1,11 +1,64 @@
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+// icons
 import { FaStumbleupon } from "react-icons/fa";
 import { ImUsers } from "react-icons/im";
 import { TbWorld } from "react-icons/tb";
 import { IoHeartSharp } from "react-icons/io5";
 import { BsStars } from "react-icons/bs";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import Background from "../../Components/Background/Background";
+
+// Components
+import Background from "@/Components/Background/Background";
+
+
+
+function FeatureIcon({ icon, label }) {
+  return (
+    <div className="flex flex-col items-center text-center group">
+      <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3 group-hover:bg-opacity-30 transition-all duration-300">
+        {icon}
+      </div>
+      <span className="text-white text-sm font-medium">
+        {label}
+      </span>
+    </div>
+  )
+}
+
+
+function FeatureIcons() {
+
+  const features = [
+    { Icon: ImUsers, label: "Connect with friends" },
+    { Icon: TbWorld, label: "Global community" },
+    { Icon: IoHeartSharp, label: "Share passions" },
+    { Icon: BsStars, label: "Inspire others" },
+  ];
+
+  return (
+    <div className="flex flex-wrap justify-center gap-8 mb-12">
+      {features.map((feature, index) => (
+        <FeatureIcon key={index} icon={<feature.Icon className="w-8 h-8 text-purple-600" />} label={feature.label} />
+      ))}
+    </div>
+  )
+}
+
+
+
+function CTAButton() {
+  return (
+    <div className="flex gap-4 justify-center">
+      <Link
+        to="/login"
+        className="px-8 py-4 bg-white text-purple-900 rounded-full font-semibold text-lg hover:bg-gray-100 transform hover:scale-110 transition-all duration-200 shadow-lg"
+      >
+        Get Started
+      </Link>
+    </div>
+  );
+}
 
 export default function Home() {
   const taglines = [
@@ -25,7 +78,7 @@ export default function Home() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [taglines.length]);
 
   return (
     <Background maxWidth="max-w-4xl">
@@ -54,50 +107,9 @@ export default function Home() {
         </span>
       </p>
 
-      {/* Feature Icons */}
-      <div className="flex flex-wrap justify-center gap-8 mb-12">
-        <div className="flex flex-col items-center text-center group">
-          <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3 group-hover:bg-opacity-30 transition-all duration-300">
-            <ImUsers className="w-8 h-8 text-purple-600" />
-          </div>
-          <span className="text-white text-sm font-medium">
-            Connect with friends
-          </span>
-        </div>
 
-        <div className="flex flex-col items-center text-center group">
-          <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3 group-hover:bg-opacity-30 transition-all duration-300">
-            <TbWorld className="w-8 h-8 text-purple-600" />
-          </div>
-          <span className="text-white text-sm font-medium">
-            Global community
-          </span>
-        </div>
-
-        <div className="flex flex-col items-center text-center group">
-          <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3 group-hover:bg-opacity-30 transition-all duration-300">
-            <IoHeartSharp className="w-8 h-8 text-purple-600" />
-          </div>
-          <span className="text-white text-sm font-medium">Share passions</span>
-        </div>
-
-        <div className="flex flex-col items-center text-center group">
-          <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-3 group-hover:bg-opacity-30 transition-all duration-300">
-            <BsStars className="w-8 h-8 text-purple-600" />
-          </div>
-          <span className="text-white text-sm font-medium">Inspire others</span>
-        </div>
-      </div>
-
-      {/* CTA Buttons */}
-      <div className="flex gap-4 justify-center">
-        <Link
-          to="/login"
-          className="px-8 py-4 bg-white text-purple-900 rounded-full font-semibold text-lg hover:bg-gray-100 transform hover:scale-110 transition-all duration-200 shadow-lg"
-        >
-          Get Started
-        </Link>
-      </div>
+      <FeatureIcons />
+      <CTAButton />
     </Background>
   );
 }
