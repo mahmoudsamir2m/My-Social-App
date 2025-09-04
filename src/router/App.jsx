@@ -6,12 +6,12 @@ import { postRoutes } from './posts.routes'
 import { authRoutes } from './auth.routes'
 
 const routes = createBrowserRouter([
+    ...authRoutes,
     {
         path: "",
         element: <MainLayout />,
         children: [
             { index: true, element: <Home /> },
-            ...authRoutes,
             ...postRoutes,
             { path: "*", element: <NotFound /> },
         ],

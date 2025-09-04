@@ -4,7 +4,7 @@ import { Input } from "@heroui/react";
 export default function AppInput({ label, icon, type, placeholder, isInvalid, errorMessage ,register }) {
     return (
         <div className="group">
-            <label className="block text-sm font-semibold text-gray-200 mb-2">
+            <label className="block text-sm font-semibold text-gray-800 mb-1">
                 {label}
             </label>
             <div className="relative">

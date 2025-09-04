@@ -8,11 +8,11 @@ import PostDetails from './pages/PostDetails/PostDetails'
 import Profile from './pages/Profile/Profile'
 import NotFound from './pages/NotFound/NotFound'
 const routes = createBrowserRouter([
+  { index: true, element: <Home /> },
   {
     path: "",
     element: <MainLayout />,
     children: [
-      { index: true, element: <Home /> },
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
       { path: "posts", element: <Posts /> },
@@ -30,5 +30,4 @@ function App() {
     </>
   );
 }
-
 export default App
